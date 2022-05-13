@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 public class EnemyControler : MonoBehaviour
 {
-    
-    public float EyesRange = 1000f;
-    public float atackRange = 150f;
+
+    public Vector2 EyesRange;
+    public Vector2 atackRange;
     private Transform Player;
 
     public float HP = 100;
@@ -24,11 +24,12 @@ public class EnemyControler : MonoBehaviour
     {
         float distanceFromPlayer = Vector2.Distance(Player.position, transform.position);　//　distance of ObjEnemy with ObjTagPlayer
         
-        if (distanceFromPlayer < EyesRange && distanceFromPlayer > atackRange ) // 
+        if (distanceFromPlayer < EyesRange.x && distanceFromPlayer > atackRange.x  ) // 
         {
             transform.position = Vector2.MoveTowards(this.transform.position, Player.position, speed * Time.deltaTime);
+           
         }
-        if (distanceFromPlayer < atackRange)
+        if (distanceFromPlayer < atackRange.x)
         {
             Debug.Log("-HP");
         }
@@ -37,8 +38,8 @@ public class EnemyControler : MonoBehaviour
     private void OnDrawGizmosSelected() // draw 
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, EyesRange);
-        Gizmos.DrawWireSphere(transform.position, atackRange);
+        Gizmos.DrawWireCube(transform.position, atackRange);
+        Gizmos.DrawWireCube(transform.position, EyesRange);
     }
     
 }
