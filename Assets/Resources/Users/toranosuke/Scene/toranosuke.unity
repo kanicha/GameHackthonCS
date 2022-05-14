@@ -295,6 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5d5d54ae95c4344834377149de696a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextScene: FadeTest
   fadecurtain: {fileID: 1459913043}
 --- !u!4 &1594556944
 Transform:
