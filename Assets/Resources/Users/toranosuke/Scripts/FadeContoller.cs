@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class FadeContoller : MonoBehaviour
+public class FadeContoller : SingletonMonoBehaviour<FadeContoller>
 {
-
-
     private static Canvas canvas;
 
     private static Image image;
@@ -30,27 +29,27 @@ public class FadeContoller : MonoBehaviour
         image.raycastTarget = false;
 
         DontDestroyOnLoad(canvas.gameObject);
-       // DontDestroyOnLoad(instance.gameObject);
-       // canvasObject.AddComponent<Transition>();
+        DontDestroyOnLoad(Instance.gameObject);
+        canvasObject.AddComponent<FadeContoller>();
     }
     private void Start()
     {
         Init();
     }
 
-   /* public void LoadScene(float interval, GameScene gamescene)
-    {
-        if (_canLoadScene)
-        {
-            StartCoroutine(Fade(interval, gamescene.ToString()));
-        }
-    }*/
+     public void LoadScene(float interval, GameScene gamescene)
+     {
+         if (_canLoadScene)
+         {
+             StartCoroutine(Fade(interval, gamescene.ToString()));
+         }
+     }
 
     public IEnumerator Fade(float interval, string taransition2)
     {
         yield return FadeOut(interval);
 
-       // yield return SceneManager.LoadSceneAsync(taransition2);
+        yield return SceneManager.LoadSceneAsync(taransition2);
 
         yield return FadeIn(interval);
     }
@@ -59,7 +58,7 @@ public class FadeContoller : MonoBehaviour
     {
         _canLoadScene = false;
         float time = 0f;
-      //  Canvas.enabled = true;
+        //  Canvas.enabled = true;
 
         while (time <= interval)
         {
@@ -82,7 +81,7 @@ public class FadeContoller : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
-        //Canvas.enabled = false;
+        canvas.enabled = false;
     }
 
 
