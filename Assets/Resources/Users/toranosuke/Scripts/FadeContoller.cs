@@ -58,12 +58,12 @@ public class FadeContoller : SingletonMonoBehaviour<FadeContoller>
     {
         _canLoadScene = false;
         float time = 0f;
-        //  Canvas.enabled = true;
+        canvas.enabled = true;
 
         while (time <= interval)
         {
             float fadeAlpha = Mathf.Lerp(0f, 1f, time / interval);
-            //Image.color = new Color(0.0f, 0.0f, 0.0f, fadeAlpha);
+            image.color = new Color(0.0f, 0.0f, 0.0f, fadeAlpha);
             time += Time.deltaTime;
             yield return null;
         }
@@ -77,7 +77,7 @@ public class FadeContoller : SingletonMonoBehaviour<FadeContoller>
         while (time <= interval)
         {
             float fadeAlpha = Mathf.Lerp(1f, 0f, time / interval);
-            //Image.color = new Color(0.0f, 0.0f, 0.0f, fadeAlpha);
+            image.color = new Color(0.0f, 0.0f, 0.0f, fadeAlpha);
             time += Time.deltaTime;
             yield return null;
         }

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Users/toranosuke/Scene/FadeTest.unity
     guid: a62634afb82a1d24eb165bb19a2722d1
+  - enabled: 1
+    path: Assets/Resources/Users/toranosuke/Scene/Title.unity
+    guid: 527ed8f774779cd4eba94d319719f428
   m_configObjects: {}

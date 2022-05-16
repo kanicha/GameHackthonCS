@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
+    GameScene Title;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,7 @@ public class TestScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            //SceneTrasitionFade.FadeStart();
+            //FadeContoller.LoadScene(3f, Title);
         }
     }
 }
