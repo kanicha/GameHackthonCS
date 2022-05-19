@@ -1,78 +1,89 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class EnemyControler : MonoBehaviour
 {
-
-    public Vector2 EyesRange;
-    public Vector2 atackRange;
+    
+    public float EyesRange;
+    public float atackRange;
+    private Transform Player;
+    public float speed, speed2;
+    public List<GameObject> LimitMovingRange;
     public Rigidbody2D rb;
-      private Transform Player;
-    public float speed ;
-    public bool mustMove = true;
-    public bool mustTurn;
-    public Transform groundCheckPos;
-    public LayerMask groundLayer;
-
+    private float attackCountdown = 0f;
+    public float attackRate = 1f;
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform; //　playerを探す
-        //mustMove = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (mustMove)
+        attackCountdown -= Time.deltaTime;
+        //
+        float distance = Vector2.Distance(Player.position, transform.position);　//　distance of ObjEnemy with ObjTagPlayer
+
+        if (distance < EyesRange && distance > atackRange) // 
         {
-            Move();
-            /*float  distanceFromPlayer = Vector2.Distance(Player.position, transform.position);　//　distance of ObjEnemy with ObjTagPlayer
-
-            if (distanceFromPlayer < EyesRange.x  && distanceFromPlayer > atackRange.x  ) // 
-            {
-                transform.position = Vector2.MoveTowards(this.transform.position, Player.position, EnemyStatus.speed * Time.deltaTime);
-               //transform.position = Vector3.Lerp(this.transform.position, Player.transform.position, EnemyStatus.speed * Time.deltaTime);
-            }
-            if (distanceFromPlayer < atackRange.x)
-            {
-                Debug.Log("-HP");
-
-            }
-
+            DetectPlayer();
         }
-        private void OnDrawGizmosSelected() // draw 
+        if (distance <= atackRange)
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(transform.position, atackRange);
-            Gizmos.DrawWireCube(transform.position, EyesRange);
-        }*/
+            Attack();
         }
-       
+         if (distance > EyesRange)
+        {
+            //MovingAround();
+        }
+
     }
-    private void FixedUpdate()
+    
+
+
+    private void OnDrawGizmosSelected() // draw for easy to see range
     {
-        if (mustMove)
-        {
-            mustTurn = !Physics2D.OverlapCircle(groundCheckPos.position, 0.1f, groundLayer);
-        }
+        Gizmos.color = Color.red;
+        var position = transform.position;
+        Gizmos.DrawWireSphere(position, atackRange);
+        Gizmos.DrawWireSphere(position, EyesRange);
     }
-    void Move()
+
+    private void DetectPlayer()
+    {
+        transform.position = Vector2.MoveTowards(this.transform.position, Player.position, speed * Time.deltaTime);
+         //transform.position = Vector3.Lerp(this.transform.position, Player.transform.position, speed * Time.deltaTime);
+    }
+    private void Attack()
+    {
+        if(attackCountdown <= 0f)
+
         {
-        if(mustTurn)
-        {
-            Flip();
+            attackCountdown = 1f / attackRate;
+            StartCoroutine(DoAttack(.6f));
         }
-            rb.velocity = new Vector2(speed * Time.fixedDeltaTime, rb.velocity.y);
-        }
+
+    }
+    IEnumerator DoAttack( float delay)
+    {
+        print("Start");
+        yield return new WaitForSeconds(delay);
+        PlayerStatus.HP -= 20;
+    }
+
+
+    private void MovingAround() // まだ出来ない
+    {
+        rb.velocity = new Vector2(speed2 * Time.fixedDeltaTime, 0f);
+    }
+    //----------
+    private void Patrol()
+    {
+        Flip();
+    }
     void Flip()
     {
-        mustMove = false;
-        transform.position = new Vector2(transform.position.x * -1, transform.position.y);
-        speed *= -1;
-        mustMove = true;
+        transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
     }
-    
-    
 }

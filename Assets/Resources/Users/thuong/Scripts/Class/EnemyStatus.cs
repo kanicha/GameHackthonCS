@@ -6,12 +6,11 @@ public static class EnemyStatus
 {
     public static int hp = 0;
     public static int atk = 0;
-    public static float speed = 1;
 
     public enum EnemyMoveState
     {
         None,
-        Dash, // ‘–‚è
+        Dash, // ï¿½ï¿½ï¿½ï¿½
         Attack,
     }
     public static EnemyMoveState playerMoveState = EnemyMoveState.None;
