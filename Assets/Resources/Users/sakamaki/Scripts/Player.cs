@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
+    [SerializeField] private HealthBar _healthBar;
     [SerializeField]
     private Animator animator;
     [SerializeField]
@@ -20,6 +22,13 @@ public class Player : MonoBehaviour
     public GameObject attackObj;
 
     private string deadArea = "DeadArea";
+
+    private void Start()
+    {
+        // プレイヤーHPの初期化
+        PlayerStatus.HP = PlayerStatus.maxHP;
+        _healthBar.SetMaxHealth(PlayerStatus.maxHP);
+    }
 
     // Update is called once per frame
     void Update()
@@ -60,6 +69,11 @@ public class Player : MonoBehaviour
             Jump();
         }
         rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+        
+        
+        // ヘルスバーとプレイヤーのHPを同期させる処理
+        _healthBar.SetHealth(PlayerStatus.HP);
+        Die();
     }
 
     void Jump()
@@ -75,5 +89,16 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         isAttack = false;
         attackObj.SetActive(false);
+    }
+    
+    /// <summary>
+    /// プレイヤーのHPが0以下になった時オブジェクトを削除する
+    /// </summary>
+    private void Die()  // example for player
+    {
+        if (PlayerStatus.HP <= 0)
+        {
+            Destroy(_player.gameObject);
+        }
     }
 }
