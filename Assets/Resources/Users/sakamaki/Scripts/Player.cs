@@ -17,8 +17,6 @@ public class Player : MonoBehaviour
     private int jumpForce = 3;
 
     private bool isMoving = false;
-    private bool isAttack = false;
-
     public GameObject attackObj;
 
     private string deadArea = "DeadArea";
@@ -59,7 +57,8 @@ public class Player : MonoBehaviour
         // 攻撃
         if(Input.GetKeyDown(KeyCode.LeftShift))
         {
-            isAttack = true;
+            PlayerStatus.playerMoveState = PlayerStatus.PlayerMoveState.Attack;
+            
             StartCoroutine(WaitForAttack());
             attackObj.SetActive(true);
         }
@@ -87,7 +86,7 @@ public class Player : MonoBehaviour
     IEnumerator WaitForAttack()
     {
         yield return new WaitForSeconds(0.5f);
-        isAttack = false;
+        PlayerStatus.playerMoveState = PlayerStatus.PlayerMoveState.Idle;
         attackObj.SetActive(false);
     }
     
