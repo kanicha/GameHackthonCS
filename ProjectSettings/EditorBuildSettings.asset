@@ -5,16 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Resources/Users/toranosuke/Scene/toranosuke.unity
-    guid: 9a89d1fa72ef2b14a9894cd0f3c6d02a
+    path: Assets/Resources/Scene/Title.unity
+    guid: a63cd0efd9c843340aa3134b62253fc1
   - enabled: 1
-    path: Assets/Resources/Users/toranosuke/Scene/FadeTest.unity
-    guid: a62634afb82a1d24eb165bb19a2722d1
+    path: Assets/Resources/Scene/Game.unity
+    guid: 6cafc022302e23242a2bfaa3fe3bec05
   - enabled: 1
-    path: Assets/Resources/Users/toranosuke/Scene/Title.unity
-    guid: 527ed8f774779cd4eba94d319719f428
+    path: Assets/Resources/Scene/GameOver.unity
+    guid: f458294c5379d3948b1cafd8d6c4e0f7
   m_configObjects: {}

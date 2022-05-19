@@ -32,6 +32,10 @@ public class GameOverController : MonoBehaviour
             _selectNum++;
             SelectText();
         }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            SceneChange();
+        }
     }
 
     private void SelectText()
@@ -49,5 +53,18 @@ public class GameOverController : MonoBehaviour
         vec = _titleText[_selectNum].transform.position;
         vec += new Vector2(_cursorLength, 0);
         _curor.transform.position = vec;
+    }
+    
+    private void SceneChange()
+    {
+        // 選択しているモードに応じて遷移
+        if (_selectNum == 0)
+        {
+            FadeContoller.Instance.LoadScene(0.2f, GameScene.Game);
+        }
+        else if (_selectNum == 1)
+        {
+            FadeContoller.Instance.LoadScene(0.2f, GameScene.Title);
+        }
     }
 }

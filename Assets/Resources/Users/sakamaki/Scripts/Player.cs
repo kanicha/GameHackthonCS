@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
     {
         if (PlayerStatus.HP <= 0)
         {
-            Destroy(_player.gameObject);
+            FadeContoller.Instance.LoadScene(0.2f, GameScene.GameOver);
         }
     }
 }

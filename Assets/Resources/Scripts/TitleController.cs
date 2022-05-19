@@ -18,7 +18,7 @@ public class TitleController : MonoBehaviour
         vec += new Vector2(_cursorLength, 0);
         _cursor.transform.position = vec;
 
-        //Xé≤Çâ¡éZÇ≥ÇπÇÈ
+        //XËª∏„ÇíÂä†ÁÆó„Åï„Åõ„Çã
     }
 
     // Update is called once per frame
@@ -33,6 +33,10 @@ public class TitleController : MonoBehaviour
         {
             _selectNum++;
             SelectText();
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            SceneChange();
         }
     }
 
@@ -49,5 +53,18 @@ public class TitleController : MonoBehaviour
         vec = _titleText[_selectNum].transform.position;
         vec += new Vector2(_cursorLength, 0);
         _cursor.transform.position = vec;
+    }
+
+    private void SceneChange()
+    {
+        // ÈÅ∏Êäû„Åó„Å¶„ÅÑ„Çã„É¢„Éº„Éâ„Å´Âøú„Åò„Å¶ÈÅ∑Áßª
+        if (_selectNum == 0)
+        {
+            FadeContoller.Instance.LoadScene(0.2f, GameScene.Game);
+        }
+        else if (_selectNum == 1)
+        {
+            Application.Quit();
+        }
     }
 }
