@@ -13,11 +13,14 @@ public class EnemyControler : MonoBehaviour
     private float attackCountdown = 0f;
     public float attackRate = 1f;
     public int _localHp = EnemyStatus.MaxHp;
+    // HPと同じで個々でモードを持っておく
+    public PlayerStatus.PlayerModeState enemyMode;
     
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Players").transform; //　playerを探す
+        enemyMode = PlayerStatus.PlayerModeState.Dark;
     }
 
     // Update is called once per frame

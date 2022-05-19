@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
         // プレイヤーHPの初期化
         PlayerStatus.HP = PlayerStatus.maxHP;
         _healthBar.SetMaxHealth(PlayerStatus.maxHP);
+
+        PlayerStatus.playerModeState = PlayerStatus.PlayerModeState.Light;
     }
 
     // Update is called once per frame
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour
 
         isMoving = horizontal != 0;
 
+        // 移動
         if(isMoving)
         {
             // 移動中なのでモードを変更
@@ -54,8 +57,20 @@ public class Player : MonoBehaviour
             PlayerStatus.playerMoveState = PlayerStatus.PlayerMoveState.Idle;
         }
 
+        PlayerActions();
+        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+        // ヘルスバーとプレイヤーのHPを同期させる処理
+        _healthBar.SetHealth(PlayerStatus.HP);
+        Die();
+    }
+
+    /// <summary>
+    /// プレイヤーがボタンを押したときに動作する行動処理をまとめた関数
+    /// </summary>
+    private void PlayerActions()
+    {
         // 攻撃
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if(Input.GetKeyDown(KeyCode.X))
         {
             PlayerStatus.playerMoveState = PlayerStatus.PlayerMoveState.Attack;
             
@@ -63,29 +78,49 @@ public class Player : MonoBehaviour
             attackObj.SetActive(true);
         }
         // ジャンプ
-        else if(Input.GetKeyDown(KeyCode.Space) && PlayerStatus.playerMoveState != PlayerStatus.PlayerMoveState.Jump)
+        else if(Input.GetKeyDown(KeyCode.Z) && !PlayerStatus.isJump)
         {
             Jump();
         }
-        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
-        
-        
-        // ヘルスバーとプレイヤーのHPを同期させる処理
-        _healthBar.SetHealth(PlayerStatus.HP);
-        Die();
+        // モードチェンジ
+        else if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            ModeChange();
+        }
     }
-
+    
     void Jump()
     {
         // ジャンプをおこなうのでステートを代入
-        PlayerStatus.playerMoveState = PlayerStatus.PlayerMoveState.Jump; 
- 
+        PlayerStatus.playerMoveState = PlayerStatus.PlayerMoveState.Jump;
+        PlayerStatus.isJump = true;
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
+    /// <summary>
+    /// プレイヤーがモードチェンジをおこなう処理
+    /// </summary>
+    private void ModeChange()
+    {
+        if (PlayerStatus.playerModeState == PlayerStatus.PlayerModeState.Dark)
+        {
+            PlayerStatus.playerModeState = PlayerStatus.PlayerModeState.Light;
+        }
+        else if (PlayerStatus.playerModeState == PlayerStatus.PlayerModeState.Light)
+        {
+            PlayerStatus.playerModeState = PlayerStatus.PlayerModeState.Dark;
+        }
+        else
+        {
+            PlayerStatus.playerModeState = PlayerStatus.PlayerModeState.Light;
+        }
+        
+        Debug.Log(PlayerStatus.playerModeState);
+    }
+    
     IEnumerator WaitForAttack()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         PlayerStatus.playerMoveState = PlayerStatus.PlayerMoveState.Idle;
         attackObj.SetActive(false);
     }

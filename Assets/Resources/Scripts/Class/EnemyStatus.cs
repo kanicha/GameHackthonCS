@@ -13,13 +13,8 @@ public static class EnemyStatus
         Dash, 
         Attack,
     }
-    public static EnemyMoveState playerMoveState = EnemyMoveState.None;
-    public enum EnemyModeState
-    {
-        None,
-        Light,
-        Dark,
-    }
-    public static EnemyModeState enemyModeState = EnemyModeState.None;
+    public static EnemyMoveState enemyMoveState = EnemyMoveState.None;
+
+    public static PlayerStatus.PlayerModeState enemyModeState = PlayerStatus.PlayerModeState.None;
 
 }

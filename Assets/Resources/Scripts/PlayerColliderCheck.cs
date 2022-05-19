@@ -9,6 +9,9 @@ public class PlayerColliderCheck : MonoBehaviour
     {
         // 着地した先が地面であったらfalseにする
         if (col.transform.tag.Equals("Ground"))
+        {
             PlayerStatus.playerMoveState = PlayerStatus.PlayerMoveState.Idle;
+            PlayerStatus.isJump = false;
+        }
     }
 }
