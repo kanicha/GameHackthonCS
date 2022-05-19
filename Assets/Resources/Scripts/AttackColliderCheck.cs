@@ -7,6 +7,11 @@ public class AttackColliderCheck : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D col)
     {
+      
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
         // 攻撃を行ったときに相手のモードと自分のモードが違うときに攻撃を通す 
         if (col.transform.tag.Equals("Enemy") && PlayerStatus.playerModeState != col.gameObject.GetComponent<EnemyControler>().enemyMode)
         {
