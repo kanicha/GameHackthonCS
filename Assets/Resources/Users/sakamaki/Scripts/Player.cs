@@ -15,11 +15,9 @@ public class Player : MonoBehaviour
     private int jumpForce = 3;
 
     private bool isMoving = false;
-    public bool isJumping = false; // ジャンプしているかどうか true:している false:していない
-    private bool isFalling = false;
     private bool isAttack = false;
 
-    public GameObject jemPrefab;
+    public GameObject attackObj;
 
     private string deadArea = "DeadArea";
 
@@ -29,10 +27,12 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
 
         isMoving = horizontal != 0;
-        isFalling = rb.velocity.y < -0.5f;
-        
+
         if(isMoving)
         {
+            // 移動中なのでモードを変更
+            PlayerStatus.playerMoveState = PlayerStatus.PlayerMoveState.Dash;
+            
             Vector3 scale = _player.transform.localScale;
 
             if(horizontal < 0 && scale.x > 0 || horizontal > 0 && scale.x < 0)
@@ -42,25 +42,31 @@ public class Player : MonoBehaviour
 
             _player.transform.localScale = scale;
         }
+        else
+        {
+            PlayerStatus.playerMoveState = PlayerStatus.PlayerMoveState.Idle;
+        }
 
-        if(Input.GetKey(KeyCode.LeftShift))
+        // 攻撃
+        if(Input.GetKeyDown(KeyCode.LeftShift))
         {
             isAttack = true;
             StartCoroutine(WaitForAttack());
-            jemPrefab.SetActive(true);
+            attackObj.SetActive(true);
         }
-        else if(Input.GetKeyDown(KeyCode.Space) && !isJumping && !isFalling)
+        // ジャンプ
+        else if(Input.GetKeyDown(KeyCode.Space) && PlayerStatus.playerMoveState != PlayerStatus.PlayerMoveState.Jump)
         {
             Jump();
         }
         rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
-
-        Debug.Log(isJumping);
     }
 
     void Jump()
     {
-        isJumping = true;
+        // ジャンプをおこなうのでステートを代入
+        PlayerStatus.playerMoveState = PlayerStatus.PlayerMoveState.Jump; 
+ 
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
@@ -68,6 +74,6 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         isAttack = false;
-        jemPrefab.SetActive(false);
+        attackObj.SetActive(false);
     }
 }
