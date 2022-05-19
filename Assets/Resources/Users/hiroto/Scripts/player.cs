@@ -29,9 +29,8 @@ public class Player : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal"); // 左右移動
 
-        //// アニメーション用
-        //isMoving = horizontal != 0;
-        //isFalling = rb.velocity.y < -0.5f;
+        isMoving = horizontal != 0;
+        isFalling = rb.velocity.y < -0.5f;
 
         if (isMoving)
         {
