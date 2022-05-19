@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class HPControler : MonoBehaviour
 {
 
 	public HealthBar healthBar;
@@ -20,10 +20,18 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             PlayerStatus.HP -= 20;
-            
         }
+        Die();
+        
         healthBar.SetHealth(PlayerStatus.HP);
     }
+    private void Die()  // example for player
+    {
+        if (PlayerStatus.HP <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
-	
+
 }

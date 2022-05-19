@@ -4,8 +4,8 @@ using UnityEngine;
 
 public static class EnemyStatus
 {
-    public static int hp = 0;
-    public static int atk = 0;
+    public static int hp = 100;
+    public static int atk = 20;
 
     public enum EnemyMoveState
     {

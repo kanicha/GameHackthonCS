@@ -33,11 +33,14 @@ public class EnemyControler : MonoBehaviour
         {
             Attack();
         }
-         if (distance > EyesRange)
+        if (distance > EyesRange)
         {
             //MovingAround();
         }
-
+        if (EnemyStatus.hp <= 0)
+        {
+            Die();
+        }
     }
     
 
@@ -69,7 +72,7 @@ public class EnemyControler : MonoBehaviour
     {
         print("Start");
         yield return new WaitForSeconds(delay);
-        PlayerStatus.HP -= 20;
+        PlayerStatus.HP -= EnemyStatus.atk;
     }
 
 
@@ -82,8 +85,13 @@ public class EnemyControler : MonoBehaviour
     {
         Flip();
     }
-    void Flip()
+    private void Flip()
     {
         transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+    }
+    private void Die()  // example for player
+    {
+        // add effect 
+        Destroy(gameObject);
     }
 }
