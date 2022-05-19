@@ -15,7 +15,7 @@ public class EnemyControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player").transform; //　playerを探す
+        Player = GameObject.FindGameObjectWithTag("Players").transform; //　playerを探す
     }
 
     // Update is called once per frame
