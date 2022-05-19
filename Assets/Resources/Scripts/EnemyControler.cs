@@ -12,6 +12,8 @@ public class EnemyControler : MonoBehaviour
     public Rigidbody2D rb;
     private float attackCountdown = 0f;
     public float attackRate = 1f;
+    public int _localHp = EnemyStatus.MaxHp;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +39,7 @@ public class EnemyControler : MonoBehaviour
         {
             //MovingAround();
         }
-        if (EnemyStatus.hp <= 0)
+        if (_localHp <= 0)
         {
             Die();
         }
