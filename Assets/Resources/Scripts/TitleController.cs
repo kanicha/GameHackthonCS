@@ -50,6 +50,7 @@ public class TitleController : MonoBehaviour
         {
             _selectNum = 0;
         }
+
         vec = _titleText[_selectNum].transform.position;
         vec += new Vector2(_cursorLength, 0);
         _cursor.transform.position = vec;
@@ -62,9 +63,14 @@ public class TitleController : MonoBehaviour
         {
             FadeContoller.Instance.LoadScene(0.2f, GameScene.Game);
         }
+        // おわるが選ばれているときは終了
         else if (_selectNum == 1)
         {
-            Application.Quit();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
+#endif
         }
     }
 }
