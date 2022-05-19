@@ -9,6 +9,7 @@ TagManager:
   - Players
   - Enemy
   - Goal
+  - Dead
   layers:
   - Default
   - TransparentFX

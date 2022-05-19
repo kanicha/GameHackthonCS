@@ -14,4 +14,20 @@ public class PlayerColliderCheck : MonoBehaviour
             PlayerStatus.isJump = false;
         }
     }
+
+    /// <summary>
+    /// あたったオブジェクトにを習得してシーン分岐
+    /// </summary>
+    /// <param name="col"></param>
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.transform.tag.Equals("Goal"))
+        {
+            FadeContoller.Instance.LoadScene(0.2f, GameScene.GameClear);
+        }
+        else if (col.transform.tag.Equals("Dead"))
+        {
+            FadeContoller.Instance.LoadScene(0.2f, GameScene.GameOver);
+        }
+    }
 }

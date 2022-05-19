@@ -6,5 +6,6 @@ public enum GameScene
 {
     Title,
     Game,
-    GameOver
+    GameOver,
+    GameClear
 }
