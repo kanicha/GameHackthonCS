@@ -24,14 +24,14 @@ public class PlayerColliderCheck : MonoBehaviour
         if (col.transform.tag.Equals("Goal"))
         {
             SoundManager.Instance.PlaySE(4);
-            FadeContoller.Instance.LoadScene(0.2f, GameScene.GameClear);
             SoundManager.Instance.StopBGM();
+            FadeContoller.Instance.LoadScene(0.2f, GameScene.GameClear);
         }
         else if (col.transform.tag.Equals("Dead"))
         {
             SoundManager.Instance.PlaySE(2);
-            FadeContoller.Instance.LoadScene(0.2f, GameScene.GameOver);
             SoundManager.Instance.StopBGM();
+            FadeContoller.Instance.LoadScene(0.2f, GameScene.GameOver);
         }
         else if (col.transform.tag.Equals("Heal"))
         {

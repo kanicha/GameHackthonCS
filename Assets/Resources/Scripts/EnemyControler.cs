@@ -12,7 +12,7 @@ public class EnemyControler : MonoBehaviour
     public List<GameObject> LimitMovingRange;
     public Rigidbody2D rb;
     private float attackCountdown = 0f;
-    public float attackRate = 0.7f;
+    public float attackRate = 0.5f;
     public int _localHp = EnemyStatus.MaxHp;
     // HPと同じで個々でモードを持っておく
     public PlayerStatus.PlayerModeState enemyMode;

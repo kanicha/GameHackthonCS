@@ -28,13 +28,13 @@ public class Player : MonoBehaviour
         _healthBar.SetMaxHealth(PlayerStatus.maxHP);
 
         PlayerStatus.playerModeState = PlayerStatus.PlayerModeState.Light;
+        
+        SoundManager.Instance.PlayBGM(0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        SoundManager.Instance.PlayBGM(0);
-        
         float horizontal = Input.GetAxis("Horizontal");
 
         isMoving = horizontal != 0;
