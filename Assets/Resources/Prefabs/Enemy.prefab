@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyDraw: {fileID: 8103035563745707288}
-  EyesRange: 250
+  EyesRange: 270
   atackRange: 70
   speed: 80
   speed2: 10

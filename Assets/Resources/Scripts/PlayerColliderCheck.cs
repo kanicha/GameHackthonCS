@@ -33,6 +33,7 @@ public class PlayerColliderCheck : MonoBehaviour
         {
             PlayerStatus.HP = PlayerStatus.maxHP;
             Destroy(col.gameObject);
+            
         }
     }
 }
