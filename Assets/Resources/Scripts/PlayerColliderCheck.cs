@@ -29,5 +29,10 @@ public class PlayerColliderCheck : MonoBehaviour
         {
             FadeContoller.Instance.LoadScene(0.2f, GameScene.GameOver);
         }
+        else if (col.transform.tag.Equals("Heal"))
+        {
+            PlayerStatus.HP = PlayerStatus.maxHP;
+            Destroy(col.gameObject);
+        }
     }
 }

@@ -21,7 +21,7 @@ public class EnemyControler : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Players").transform; //　playerを探す
-        enemyMode = PlayerStatus.PlayerModeState.Dark;
+        /*enemyMode = PlayerStatus.PlayerModeState.Dark;*/
 
         // 見た目の表示
         _enemyDraw.EnemyDrawColor(enemyMode, this.gameObject);
