@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class EnemyControler : MonoBehaviour
 {
+    [SerializeField] private EnemyDraw _enemyDraw;
     
     public float EyesRange;
     public float atackRange;
@@ -21,6 +22,9 @@ public class EnemyControler : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Players").transform; //　playerを探す
         enemyMode = PlayerStatus.PlayerModeState.Dark;
+
+        // 見た目の表示
+        _enemyDraw.EnemyDrawColor(enemyMode, this.gameObject);
     }
 
     // Update is called once per frame
@@ -38,14 +42,11 @@ public class EnemyControler : MonoBehaviour
         {
             Attack();
         }
-        if (distance > EyesRange)
-        {
-            //MovingAround();
-        }
         if (_localHp <= 0)
         {
             Die();
         }
+       
     }
     
 

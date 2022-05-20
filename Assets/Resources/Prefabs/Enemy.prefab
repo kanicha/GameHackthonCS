@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5621282488969376052}
   - component: {fileID: 5621282488969376053}
   - component: {fileID: 5621282488969376010}
+  - component: {fileID: 8942144836682844481}
   - component: {fileID: 5621282488969376054}
   - component: {fileID: 5621282488969376055}
   m_Layer: 0
@@ -55,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f7047d6e49ad5554f85a2d417b3ebc52, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,13 +100,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732cf88364ec243e1a626845def9f039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EyesRange: 230
+  _enemyDraw: {fileID: 8942144836682844481}
+  EyesRange: 250
   atackRange: 70
   speed: 80
   speed2: 10
   LimitMovingRange: []
   rb: {fileID: 5621282488969376055}
   attackRate: 1
+  _localHp: 100
+  enemyMode: 0
+--- !u!114 &8942144836682844481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5621282488969376011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b5b0b93b373bf4dbe284a76192b542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &5621282488969376054
 BoxCollider2D:
   m_ObjectHideFlags: 0
