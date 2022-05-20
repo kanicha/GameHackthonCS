@@ -12,7 +12,7 @@ public class EnemyControler : MonoBehaviour
     public List<GameObject> LimitMovingRange;
     public Rigidbody2D rb;
     private float attackCountdown = 0f;
-    public float attackRate = 1f;
+    public float attackRate = 0.7f;
     public int _localHp = EnemyStatus.MaxHp;
     // HPと同じで個々でモードを持っておく
     public PlayerStatus.PlayerModeState enemyMode;
@@ -67,7 +67,6 @@ public class EnemyControler : MonoBehaviour
     private void Attack()
     {
         if(attackCountdown <= 0f)
-
         {
             attackCountdown = 1f / attackRate;
             StartCoroutine(DoAttack(.6f));
@@ -76,8 +75,8 @@ public class EnemyControler : MonoBehaviour
     }
     IEnumerator DoAttack( float delay)
     {
-        print("Start");
         yield return new WaitForSeconds(delay);
+        SoundManager.Instance.PlaySE(0);
         PlayerStatus.HP -= EnemyStatus.atk;
     }
 

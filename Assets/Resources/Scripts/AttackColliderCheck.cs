@@ -12,6 +12,7 @@ public class AttackColliderCheck : MonoBehaviour
         {
             // EnemyオブジェクトのHP実数値を習得してきてPlayerのATK分値を減らす
             col.gameObject.GetComponent<EnemyControler>()._localHp -= PlayerStatus.atk;
+            SoundManager.Instance.PlaySE(0);
         }
     }
 }

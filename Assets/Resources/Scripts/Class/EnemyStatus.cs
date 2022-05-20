@@ -5,7 +5,7 @@ using UnityEngine;
 public static class EnemyStatus
 {
     public static int MaxHp = 100;
-    public static int atk = 20;
+    public static int atk = 30;
 
     public enum EnemyMoveState
     {

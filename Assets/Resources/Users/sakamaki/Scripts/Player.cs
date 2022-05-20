@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SoundManager.Instance.PlayBGM(0);
+        
         float horizontal = Input.GetAxis("Horizontal");
 
         isMoving = horizontal != 0;
@@ -124,7 +126,8 @@ public class Player : MonoBehaviour
         PlayerStatus.playerMoveState = PlayerStatus.PlayerMoveState.Idle;
         attackObj.SetActive(false);
     }
-    
+
+    private bool isSE = false;
     /// <summary>
     /// プレイヤーのHPが0以下になった時オブジェクトを削除する
     /// </summary>
@@ -132,6 +135,12 @@ public class Player : MonoBehaviour
     {
         if (PlayerStatus.HP <= 0)
         {
+            if (!isSE)
+            {
+                SoundManager.Instance.PlaySE(2);
+                isSE = true;
+            }
+            SoundManager.Instance.StopBGM();
             FadeContoller.Instance.LoadScene(0.2f, GameScene.GameOver);
         }
     }
