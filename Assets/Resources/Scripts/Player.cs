@@ -107,17 +107,17 @@ public class Player : MonoBehaviour
         if (PlayerStatus.playerModeState == PlayerStatus.PlayerModeState.Dark)
         {
             PlayerStatus.playerModeState = PlayerStatus.PlayerModeState.Light;
+            SoundManager.Instance.PlaySE(1);
         }
         else if (PlayerStatus.playerModeState == PlayerStatus.PlayerModeState.Light)
         {
             PlayerStatus.playerModeState = PlayerStatus.PlayerModeState.Dark;
+            SoundManager.Instance.PlaySE(1);
         }
         else
         {
             PlayerStatus.playerModeState = PlayerStatus.PlayerModeState.Light;
         }
-        
-        Debug.Log(PlayerStatus.playerModeState);
     }
     
     IEnumerator WaitForAttack()
