@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
             Jump();
         }
         // モードチェンジ
-        else if (Input.GetKeyDown(KeyCode.LeftShift))
+        else if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.C))
         {
             ModeChange();
         }
